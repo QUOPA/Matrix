@@ -1,0 +1,20 @@
+#pragma once
+
+typedef int IdxType;
+
+enum MATRIX_UNRARY_OPERATIONS
+{
+	UNARY_BASE = 0,
+	UNARY_TRANSPOSE = 1
+};
+
+enum MATRIX_BINARY_OPERATIONS
+{
+	BINARY_BASE = 0,
+	BINARY_ADD = 1,
+	BINARY_SUB = 2,
+	BINARY_MATMUL = 3,
+	BINARY_MATDIV = 4,
+	BINARY_EMUL = 5,
+	BINARY_EDIV = 6,
+};
