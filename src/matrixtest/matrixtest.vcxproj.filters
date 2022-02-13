@@ -20,10 +20,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UnaryOperationTestCases.h">
+    <ClInclude Include="TestCasesUnaryOperation.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="TestSuites.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCasesBinaryOperation.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

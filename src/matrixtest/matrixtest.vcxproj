@@ -146,7 +146,8 @@
     <ClCompile Include="TestMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UnaryOperationTestCases.h" />
+    <ClInclude Include="TestCasesBinaryOperation.h" />
+    <ClInclude Include="TestCasesUnaryOperation.h" />
     <ClInclude Include="TestSuites.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,6 +2,7 @@
 
 #include "matrix/matrixbase.h"
 #include "matrix/matrixexceptions.h"
+#include "matrix/matrixReference.h"
 #include <vector>
 
 template <typename T>
@@ -18,7 +19,13 @@ public:
 	myMatrix(const std::vector<T> & datain, IdxType nRows, IdxType nCols);	
 
 	template<typename OtherMat>
-	myMatrix(const myMatrixBase<T, OtherMat>& rhs) { this->operator=(rhs); }
+	myMatrix(const myMatrixBase<T, OtherMat>& rhs) 
+		:m_pData(nullptr), m_nRows(0), m_nCols(0) 
+	{ this->operator=(rhs); }
+
+	myMatrix(const myMatrix& rhs) 
+		:m_pData(nullptr), m_nRows(0), m_nCols(0)
+	{ this->operator=(rhs); }
 
 	inline IdxType getSize() const { return m_nRows * m_nCols; }
 	inline IdxType getRows() const { return m_nRows; }
@@ -55,13 +62,22 @@ public:
 
 		for (IdxType r = 0; r < m_nRows; ++r)
 			for (IdxType c = 0; c < m_nCols; ++c)
-				*_v(r, c) = *rhs._v(r, c);
+				_v(r, c) = rhs._v(r, c);
 
 	}
 
+	inline const auto _ref() const {
+		return matrixReference<T,const myMatrix<T> >(this);
+	}
+
+	inline auto _ref() {
+		return matrixReference<T, myMatrix<T>> (this);
+	}
+
+
 protected:
-	inline const T* _v(IdxType r, IdxType c) const { return m_pData + r * m_nCols + c; }
-	inline T* _v(IdxType r, IdxType c) { return m_pData + r * m_nCols + c; }
+	inline const T _v(IdxType r, IdxType c) const { return m_pData[r * m_nCols + c]; }
+	inline T& _v(IdxType r, IdxType c) { return m_pData[r * m_nCols + c]; }
 	
 
 private:
@@ -80,10 +96,18 @@ private:
 	template <typename T2, typename Derived2>
 	friend class myMatrixBase;
 
+	template <typename T2, typename Derived2>
+	friend class matrixReference;
+	
+	template <typename T2, typename InMatDerieved, int CalcType>
+	friend class myMatrixUnary;
+
+
 };
 
 template<typename T>
 myMatrix<T>::myMatrix(const T*& datain, IdxType nRows, IdxType nCols)
+	:m_pData(nullptr), m_nRows(0), m_nCols(0)
 {
 	if (nRows <= 0 || nCols <= 0)
 		throw matrix_rangeerror("bad row size or column size input");
@@ -101,6 +125,7 @@ myMatrix<T>::myMatrix(const T*& datain, IdxType nRows, IdxType nCols)
 
 template<typename T>
 myMatrix<T>::myMatrix(T*&& datain, IdxType nRows, IdxType nCols)
+	:m_pData(nullptr), m_nRows(0), m_nCols(0)
 {
 	if (nRows <= 0 || nCols <= 0)
 		throw matrix_rangeerror("bad row size or column size input");
@@ -116,6 +141,7 @@ myMatrix<T>::myMatrix(T*&& datain, IdxType nRows, IdxType nCols)
 
 template<typename T>
 myMatrix<T>::myMatrix(const std::vector<T>& datain, IdxType nRows, IdxType nCols)
+	:m_pData(nullptr), m_nRows(0), m_nCols(0)
 {
 	if (nRows <= 0 || nCols <= 0)
 		throw matrix_rangeerror("bad row size or column size input");
