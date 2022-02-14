@@ -41,7 +41,8 @@ void transposeAssignment()
 	myMatrix<int> mat2(vecInts2, 5, 2);
 	showFormatedMatrix(mat2);
 	
-	mat.t() = mat2;
+	mat.t().t().t() = mat2;
+
 	std::cout << "after mat.t() = mat2 ... " << std::endl;
 	showFormatedMatrix(mat);
 

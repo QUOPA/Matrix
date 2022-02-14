@@ -66,12 +66,12 @@ public:
 
 	}
 
-	inline const auto _ref() const {
-		return matrixReference<T,const myMatrix<T> >(this);
+	inline const auto & _ref() const {
+		return *this;
 	}
 
-	inline auto _ref() {
-		return matrixReference<T, myMatrix<T>> (this);
+	inline auto & _ref() {
+		return *this;
 	}
 
 

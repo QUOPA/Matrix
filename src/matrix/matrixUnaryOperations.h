@@ -15,7 +15,8 @@ class myMatrixUnary<T, InMatDerieved, UNARY_BASE>
 {
 public:
 	explicit myMatrixUnary(const InMatDerieved & InMat) : m_InMat(InMat) {}
-	myMatrixUnary(const myMatrixUnary& InMat) : m_InMat(InMat) {}
+	//explicit myMatrixUnary(const InMatDerieved& InMat) : m_InMat(InMat) {}
+	//myMatrixUnary(const myMatrixUnary& InMat) : m_InMat(InMat) {}
 
 protected:
 	InMatDerieved m_InMat;
@@ -27,8 +28,9 @@ class myMatrixUnary<T, InMatDerieved, UNARY_TRANSPOSE>
 	, public myMatrixBase<T, myMatrixUnary<T, InMatDerieved, UNARY_TRANSPOSE> >
 {
 public:
-	explicit myMatrixUnary(const InMatDerieved & InMat) : myMatrixUnary<T, InMatDerieved, UNARY_BASE>(InMat) {}
-	myMatrixUnary(const myMatrixUnary& InMat) : myMatrixUnary<T, InMatDerieved, UNARY_BASE> (InMat) {}
+	explicit myMatrixUnary(InMatDerieved && InMat) 
+		: myMatrixUnary<T, InMatDerieved, UNARY_BASE>(InMat) {}
+	//myMatrixUnary(const myMatrixUnary& InMat) : myMatrixUnary<T, InMatDerieved, UNARY_BASE> (InMat) {}
 
 	// read
 	inline IdxType getSize() const { return this->m_InMat.getSize(); }
@@ -62,5 +64,14 @@ protected:
 	template <typename T2, typename Derived2>
 	friend class myMatrixBase;
 
+	template <typename T2, typename InMatDerieved2, int CalcType2>
+	friend class myMatrixUnary;
+
+
 };
 
+template <typename T, int OpType, typename InMatDerived>
+inline decltype(auto) createUnaryOperation(InMatDerived&& InMat)
+{
+	return myMatrixUnary<T, InMatDerived, OpType>(std::forward<InMatDerived>(InMat));
+}

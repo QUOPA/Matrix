@@ -26,8 +26,8 @@ public:
 	inline IdxType getCols() const { return derived()->getCols(); }
 
 	// Unary Operations
-	inline const auto t() const { return myMatrixUnary<T, const Derived, UNARY_TRANSPOSE>( this->ref()); }
-	inline auto t() { return myMatrixUnary<T, Derived, UNARY_TRANSPOSE>( this->ref()); }
+	inline const auto t() const { return createUnaryOperation<T, UNARY_TRANSPOSE> ( this->ref()); }
+	inline auto t() { return createUnaryOperation<T, UNARY_TRANSPOSE>( this->ref()); }
 
 	// Binary Operations 
 
@@ -55,8 +55,8 @@ public:
 	inline const T _v(IdxType r, IdxType c) const { return derived()->_v(r,c); }
 	inline T& _v(IdxType r, IdxType c) { return derived()->_v(r, c); }
 
-	inline const auto ref() const { return derived()->_ref(); }
-	inline auto ref() { return derived()->_ref(); }
+	inline decltype(auto) ref() const { return derived()->_ref(); }
+	inline decltype(auto) ref() { return derived()->_ref(); }
 
 	inline const auto _ref() const { return *derived(); }
 	inline auto _ref() { return *derived(); }
