@@ -13,8 +13,8 @@ public:
 		:m_pData(nullptr), m_nRows(0), m_nCols(0)
 	{}
 
-	myMatrix(const T* & datain, IdxType nRows, IdxType nCols);
-	myMatrix(T* && datain, IdxType nRows, IdxType nCols);
+	myMatrix(const T * datain, IdxType nRows, IdxType nCols);
+	//myMatrix(T* && datain, IdxType nRows, IdxType nCols);
 
 	myMatrix(const std::vector<T> & datain, IdxType nRows, IdxType nCols);	
 
@@ -74,8 +74,6 @@ public:
 		return *this;
 	}
 
-
-protected:
 	inline const T _v(IdxType r, IdxType c) const { return m_pData[r * m_nCols + c]; }
 	inline T& _v(IdxType r, IdxType c) { return m_pData[r * m_nCols + c]; }
 	
@@ -106,7 +104,7 @@ private:
 };
 
 template<typename T>
-myMatrix<T>::myMatrix(const T*& datain, IdxType nRows, IdxType nCols)
+myMatrix<T>::myMatrix(const T* datain, IdxType nRows, IdxType nCols)
 	:m_pData(nullptr), m_nRows(0), m_nCols(0)
 {
 	if (nRows <= 0 || nCols <= 0)
@@ -123,21 +121,6 @@ myMatrix<T>::myMatrix(const T*& datain, IdxType nRows, IdxType nCols)
 
 }
 
-template<typename T>
-myMatrix<T>::myMatrix(T*&& datain, IdxType nRows, IdxType nCols)
-	:m_pData(nullptr), m_nRows(0), m_nCols(0)
-{
-	if (nRows <= 0 || nCols <= 0)
-		throw matrix_rangeerror("bad row size or column size input");
-
-	m_pData = datain;
-	datain = nullptr;
-
-	m_nRows = nRows;
-	m_nCols = nCols;
-
-
-}
 
 template<typename T>
 myMatrix<T>::myMatrix(const std::vector<T>& datain, IdxType nRows, IdxType nCols)

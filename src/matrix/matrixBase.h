@@ -30,18 +30,20 @@ public:
 	inline auto t() { return createUnaryOperation<T, UNARY_TRANSPOSE>( this->ref()); }
 
 	// Binary Operations 
-
 	template<typename OtherDerived> inline
 		const auto operator+ (const myMatrixBase<T, OtherDerived>& rhs) const {
-		return  myMatrixBinary<T, const myMatrixBase, const myMatrixBase<T, OtherDerived>, BINARY_ADD>(this, &rhs); }
+		return createBinaryOperation<T, BINARY_ADD>(this->ref(), rhs.ref());
+	}
 
 	template<typename OtherDerived> inline
 		const auto operator- (const myMatrixBase<T, OtherDerived> & rhs) const { 
-		return  myMatrixBinary<T, const myMatrixBase, const myMatrixBase<T, OtherDerived>, BINARY_SUB> (this, &rhs); }
+		return  createBinaryOperation<T, BINARY_SUB>(this->ref(), rhs.ref());
+	}
 
 	template<typename OtherDerived> inline
 		const auto operator* (const myMatrixBase<T, OtherDerived>& rhs) const {
-		return  myMatrixBinary<T, const myMatrixBase, const myMatrixBase<T, OtherDerived>, BINARY_MATMUL>(this, &rhs); }
+		return  createBinaryOperation<T, BINARY_MATMUL>(this->ref(), rhs.ref());
+	}
 
 
 

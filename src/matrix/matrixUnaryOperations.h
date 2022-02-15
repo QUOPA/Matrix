@@ -67,6 +67,8 @@ protected:
 	template <typename T2, typename InMatDerieved2, int CalcType2>
 	friend class myMatrixUnary;
 
+	template <typename T2, typename LhsMatDerieved2, typename RhsMatDerieved2, int CalcType2>
+	friend class myMatrixBinary; 
 
 };
 

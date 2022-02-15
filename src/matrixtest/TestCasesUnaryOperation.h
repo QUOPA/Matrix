@@ -9,24 +9,22 @@ namespace unaryoperation
 
 void transpose()
 {
-	std::vector<int> vecInts = { 1, 2, 3, 4, 5, 6, 7,8, 9, 10 };
+	std::vector<int> vecInts = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 	myMatrix<int> mat(vecInts, 2, 5);
 	showFormatedMatrix(mat);
 	
-	auto mat_Tran_Express = mat.t();
-	showFormatedMatrix(mat_Tran_Express);
+	showFormatedMatrix(mat.t());
 	
-	myMatrix<int> mat_Tran_Concrete = mat_Tran_Express;
+	myMatrix<int> mat_Tran_Concrete = mat.t();
 	showFormatedMatrix(mat_Tran_Concrete);
 	
 	const myMatrix<int> constMat(vecInts, 2, 5);
 	showFormatedMatrix(constMat);
 	
-	auto constMat_Trans_Express = constMat.t();
-	showFormatedMatrix(constMat_Trans_Express);
+	showFormatedMatrix(constMat.t());
 	
-	myMatrix<int> constMat_Trans_Concrete = constMat_Trans_Express;
+	myMatrix<int> constMat_Trans_Concrete = constMat.t();
 	showFormatedMatrix(constMat_Trans_Concrete);
 }
 

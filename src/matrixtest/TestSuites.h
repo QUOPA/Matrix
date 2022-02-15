@@ -20,10 +20,10 @@ namespace binaryoperation
 
 void TestSuite()
 {
-	//REGISTERTESTCASE(elementwiseaddition)
-	//REGISTERTESTCASE(elementwisesubtraction)
-	//REGISTERTESTCASE(matrixmultiplication)
-	//REGISTERTESTCASE(compllicatedcalculation)
+	REGISTERTESTCASE(elementwiseaddition)
+	REGISTERTESTCASE(elementwisesubtraction)
+	REGISTERTESTCASE(matrixmultiplication)
+	REGISTERTESTCASE(compllicatedcalculation)
 }
 
 }

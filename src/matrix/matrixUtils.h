@@ -9,24 +9,24 @@ showMatrixNameAndInfo(mtxname)<< mtxname << std::endl;
 std::cout << "<" << #mtxname << ">" << std::endl; \
 showMatrixInfo(mtxname)
 
-template <typename LhsTypePointer, typename RhsTypePointer>
-inline void throwIfRowsDifferent(LhsTypePointer pLhsMat, RhsTypePointer pRhsMat)
+template <typename LhsType, typename RhsType>
+inline void throwIfRowsDifferent(const LhsType & LhsMat, const RhsType & RhsMat)
 {
-	if (pLhsMat->getRows() != pRhsMat->getRows()) 
+	if (LhsMat.getRows() != RhsMat.getRows())
 		throw matrix_sizematcherror_rows();
 }
 
-template <typename LhsTypePointer, typename RhsTypePointer>
-inline void throwIfColsDifferent(LhsTypePointer pLhsMat, RhsTypePointer pRhsMat)
+template <typename LhsType, typename RhsType>
+inline void throwIfColsDifferent(const LhsType & LhsMat, const RhsType & RhsMat)
 {
-	if (pLhsMat->getCols() != pRhsMat->getCols())
+	if (LhsMat.getCols() != RhsMat.getCols())
 		throw matrix_sizematcherror_cols();
 }
 
-template <typename LhsTypePointer, typename RhsTypePointer>
-inline void throwIfInnerDifferent(LhsTypePointer pLhsMat, RhsTypePointer pRhsMat)
+template <typename LhsType, typename RhsType>
+inline void throwIfInnerDifferent(const LhsType& LhsMat, const RhsType& RhsMat)
 {
-	if (pLhsMat->getCols() != pRhsMat->getRows())
+	if (LhsMat.getCols() != RhsMat.getRows())
 		throw matrix_sizematcherror_inners();
 }
 
