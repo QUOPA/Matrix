@@ -20,34 +20,62 @@ class myMatrixBase
 public:
 	inline myMatrix<T> concrete() const { return *(this->derived()); }
 	
-	// read
+	/* read only */
 	inline IdxType getSize() const { return derived()->getSize(); }
 	inline IdxType getRows() const { return derived()->getRows(); }
 	inline IdxType getCols() const { return derived()->getCols(); }
 
-	// Unary Operations
-	inline const auto t() const { return createUnaryOperation<T, UNARY_TRANSPOSE> ( this->ref()); }
+	/* Unary Operations */
+
+	// 1. Transpose
+	inline const auto t() const { return createUnaryOperation<T, UNARY_TRANSPOSE> ( this->ref());}
 	inline auto t() { return createUnaryOperation<T, UNARY_TRANSPOSE>( this->ref()); }
 
-	// Binary Operations 
+	// 2. Minus
+	inline const auto operator-() { return createUnaryOperation<T, UNARY_MINUS>(this->ref()); }
+
+	// 3. Squared
+	inline const auto Squared() { return createUnaryOperation<T, UNARY_SQUARED>(this->ref()); }
+
+	// Elementwise Manipulate
+	template<typename Fn> inline 
+		const auto EManip(Fn Func) { return createUnaryManipulateOperation<T>(this->ref(), Func); }
+
+	const auto EManip(T (*Func) (T) ) { return createUnaryManipulateOperation<T>(this->ref(), Func); }
+
+		
+
+	/*Binary Operations*/
+	
+	// 1. Elementwise Addition
 	template<typename OtherDerived> inline
 		const auto operator+ (const myMatrixBase<T, OtherDerived>& rhs) const {
 		return createBinaryOperation<T, BINARY_ADD>(this->ref(), rhs.ref());
 	}
 
+	// 2. Elementwise Subtraction
 	template<typename OtherDerived> inline
 		const auto operator- (const myMatrixBase<T, OtherDerived> & rhs) const { 
 		return  createBinaryOperation<T, BINARY_SUB>(this->ref(), rhs.ref());
 	}
 
+	// 3. MatrixMultiplication
 	template<typename OtherDerived> inline
 		const auto operator* (const myMatrixBase<T, OtherDerived>& rhs) const {
 		return  createBinaryOperation<T, BINARY_MATMUL>(this->ref(), rhs.ref());
 	}
 
-
-
+	// 5. Elementwise Multiplication
+	template<typename OtherDerived> inline
+		const auto EMul (const myMatrixBase<T, OtherDerived>& rhs) const {
+		return  createBinaryOperation<T, BINARY_EMUL>(this->ref(), rhs.ref());
+	}
 	
+	// 6. Elementwise Division
+	template<typename OtherDerived> inline
+		const auto EDiv(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return  createBinaryOperation<T, BINARY_EDIV>(this->ref(), rhs.ref());
+	}
 
 	// assingment (non const only)
 	template<typename T, typename OtherMat>
@@ -63,11 +91,9 @@ public:
 	inline const auto _ref() const { return *derived(); }
 	inline auto _ref() { return *derived(); }
 
-
 private:
 	inline const Derived* derived() const { return static_cast<const Derived*>(this); }
 	inline Derived* derived() { return static_cast<Derived*>(this); }
-
 
 	template <typename T2, typename Derived2>
 	friend std::ostream& operator<<(std::ostream& o, const myMatrixBase<T2, Derived2>& MatIn);

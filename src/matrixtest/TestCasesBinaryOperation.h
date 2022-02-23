@@ -5,7 +5,7 @@
 
 namespace binaryoperation
 {
- 
+
  void elementwiseaddition()
  {
  	std::vector<int> vecInts = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -95,9 +95,10 @@ namespace binaryoperation
  	const myMatrix<double> cmat1(std::move(vecdouble.data()), 2, 2);
  	
  	showFormatedMatrix(cmat1);
- 	auto cmat3 = cmat1.t() * cmat1 * cmat1 + cmat1 + cmat1 - cmat1 - cmat1 + cmat1 - cmat1 * cmat1;
+ 	auto cmat3 = cmat1.t() * cmat1 * cmat1 + cmat1 + cmat1 - cmat1 - cmat1 + cmat1 - cmat1 * cmat1 + cmat1;
  
  	showFormatedMatrix(cmat3.concrete());
+
  }
 
 

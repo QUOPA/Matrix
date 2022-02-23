@@ -214,5 +214,6 @@ MATRIX_BINARY_OPERATION_CLASS_SHOE
 template <typename T, int OpType, typename LhsMatDerived, typename RhsMatDerived>
 inline decltype(auto) createBinaryOperation(LhsMatDerived && LhsMat, RhsMatDerived && RhsMat)
 {
-	return myMatrixBinary<T, LhsMatDerived, RhsMatDerived, OpType>( std::forward<LhsMatDerived>(LhsMat) , std::forward<RhsMatDerived>(RhsMat));
+	return myMatrixBinary<T, LhsMatDerived, RhsMatDerived, OpType>
+		( std::forward<LhsMatDerived>(LhsMat) , std::forward<RhsMatDerived>(RhsMat));
 }

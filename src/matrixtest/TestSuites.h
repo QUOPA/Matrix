@@ -11,6 +11,8 @@ void TestSuite()
 {
 	REGISTERTESTCASE(transpose)
 	REGISTERTESTCASE(transposeAssignment)
+	REGISTERTESTCASE(minusAndDquared)
+	REGISTERTESTCASE(manipfunction)
 }
 
 }
