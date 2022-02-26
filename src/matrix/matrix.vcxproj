@@ -150,7 +150,6 @@
     <ClInclude Include="matrix.h" />
     <ClInclude Include="matrixBase.h" />
     <ClInclude Include="matrixBinaryOperations.h" />
-    <ClInclude Include="matrixCustomUnaryOperations.h" />
     <ClInclude Include="matrixExceptions.h" />
     <ClInclude Include="matrixOperations.h" />
     <ClInclude Include="matrixReference.h" />

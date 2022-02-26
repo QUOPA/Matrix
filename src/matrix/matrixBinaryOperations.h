@@ -211,9 +211,46 @@ protected:
 
 MATRIX_BINARY_OPERATION_CLASS_SHOE
 
+template <typename T, typename LhsMatBase, typename RhsMatBase, typename ManipFn>
+class myMatrixBinaryManipulate
+	: public myMatrixBinary<T, LhsMatBase, RhsMatBase, BINARY_BASE>
+	, public myMatrixBase<T, myMatrixBinaryManipulate<T, LhsMatBase, RhsMatBase, ManipFn> >
+{
+public:
+	explicit myMatrixBinaryManipulate(LhsMatBase&& lhsMat, RhsMatBase&&  rhsMat, ManipFn Func)
+		: myMatrixBinary<T, LhsMatBase, RhsMatBase, BINARY_BASE>(lhsMat, rhsMat), m_Func(Func) {}
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_LhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_LhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_LhsMat.getCols(); }
+
+protected:
+	inline const T _v(IdxType r, IdxType c) const { return m_Func(this->m_LhsMat._v(r, c), this->m_RhsMat._v(r, c));}
+
+	ManipFn m_Func;
+
+	template <typename T2, typename Derived2>
+	friend class myMatrixBase;
+	template <typename T2, typename InMatDerieved2, int CalcType2>
+	friend class myMatrixUnary;
+	template <typename T2, typename LhsMatDerieved2, typename RhsMatDerieved2, int CalcType2>
+	friend class myMatrixBinary;
+};
+
 template <typename T, int OpType, typename LhsMatDerived, typename RhsMatDerived>
 inline decltype(auto) createBinaryOperation(LhsMatDerived && LhsMat, RhsMatDerived && RhsMat)
 {
 	return myMatrixBinary<T, LhsMatDerived, RhsMatDerived, OpType>
 		( std::forward<LhsMatDerived>(LhsMat) , std::forward<RhsMatDerived>(RhsMat));
 }
+
+template <typename T,typename LhsMatDerived, typename RhsMatDerived, typename ManipFn>
+inline decltype(auto) createBinaryManipulateOperation(LhsMatDerived&& LhsMat, RhsMatDerived&& RhsMat, ManipFn Func)
+{
+	return myMatrixBinaryManipulate<T, LhsMatDerived, RhsMatDerived, ManipFn>
+		( std::forward<LhsMatDerived>(LhsMat), std::forward<RhsMatDerived>(RhsMat), Func);
+}
+
+

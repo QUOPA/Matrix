@@ -101,6 +101,25 @@ namespace binaryoperation
 
  }
 
+ void matrixcustommanipulation()
+{
+	 std::vector<int> vecInt = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	 const myMatrix<int> cmat1(vecInt, 2, 5);
+     const myMatrix<int> cmat2(vecInt, 2, 5);
+
+	 int coeff = 10;
+	 auto lamb = [&](int inVal, int inVal2) -> int {return inVal * coeff + inVal2; };
+	 
+     myMatrix<int> mat2 = cmat1.EManip(cmat2, lamb);
+	 showFormatedMatrix(mat2);
+
+	 std::vector<double> vecDouble = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	 const myMatrix<double> cmatd1(vecDouble, 2, 5);
+     const myMatrix <double> cmatd2(vecDouble, 2, 5);
+
+	 myMatrix<double> mat3 = cmatd1.EManip(cmatd2,std::pow);
+	 showFormatedMatrix(mat3);
 
 
+}
 }

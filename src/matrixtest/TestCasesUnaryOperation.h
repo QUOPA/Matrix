@@ -74,11 +74,18 @@ void manipfunction()
 
 	auto lamb = [&](double inVal) -> double {return inVal * coeff; };
 	myMatrix<double> mat2 = mat.EManip(lamb);
-
 	showFormatedMatrix(mat2);
 
 	myMatrix<double> mat3 = mat2.EManip(std::log10);
-	showFormatedMatrix(mat3)
+	showFormatedMatrix(mat3);
+
+	//std::vector<int> vecInt = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	//myMatrix<int> matInt(vecInt, 2, 5);
+
+	//myMatrix<int> matRet = matInt.EManip(std::log10);
+
+	//myMatrix<double> mat3 = mat2.EManip(std::log10);
+	//showFormatedMatrix(mat3)
 }
 
 

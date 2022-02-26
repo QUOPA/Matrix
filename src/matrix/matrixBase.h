@@ -37,13 +37,11 @@ public:
 	// 3. Squared
 	inline const auto Squared() { return createUnaryOperation<T, UNARY_SQUARED>(this->ref()); }
 
-	// Elementwise Manipulate
+	// Elementwise Unary Manipulate
 	template<typename Fn> inline 
-		const auto EManip(Fn Func) { return createUnaryManipulateOperation<T>(this->ref(), Func); }
+		const auto EManip(Fn Func) const { return createUnaryManipulateOperation<T>(this->ref(), Func); }
 
-	const auto EManip(T (*Func) (T) ) { return createUnaryManipulateOperation<T>(this->ref(), Func); }
-
-		
+	const auto EManip(T (*Func) (T) ) const { return createUnaryManipulateOperation<T>(this->ref(), Func); }
 
 	/*Binary Operations*/
 	
@@ -76,6 +74,13 @@ public:
 		const auto EDiv(const myMatrixBase<T, OtherDerived>& rhs) const {
 		return  createBinaryOperation<T, BINARY_EDIV>(this->ref(), rhs.ref());
 	}
+
+	// Elementwise Binary Manipulate
+	template<typename OtherDerived, typename Fn> inline
+		const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, Fn Func) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
+	
+	template<typename OtherDerived> inline
+	const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, T(*Func) (T, T) ) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
 
 	// assingment (non const only)
 	template<typename T, typename OtherMat>

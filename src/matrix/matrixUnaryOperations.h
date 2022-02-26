@@ -134,7 +134,6 @@ protected:
 
 	ManipFn m_Func;
 
-
 	template <typename T2, typename Derived2>
 	friend class myMatrixBase;
 	template <typename T2, typename InMatDerieved2, int CalcType2>
@@ -143,14 +142,11 @@ protected:
 	friend class myMatrixBinary;
 };
 
-
-
 template <typename T, int OpType, typename InMatDerived>
 inline decltype(auto) createUnaryOperation(InMatDerived&& InMat)
 {
 	return myMatrixUnary<T, InMatDerived, OpType>(std::forward<InMatDerived>(InMat));
 }
-
 
 template <typename T, typename InMatDerived, typename ManipFn>
 inline decltype(auto) createUnaryManipulateOperation(InMatDerived&& InMat, ManipFn Func)

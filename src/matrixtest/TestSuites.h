@@ -26,6 +26,8 @@ void TestSuite()
 	REGISTERTESTCASE(elementwisesubtraction)
 	REGISTERTESTCASE(matrixmultiplication)
 	REGISTERTESTCASE(compllicatedcalculation)
+	REGISTERTESTCASE(matrixcustommanipulation)
+
 }
 
 }
