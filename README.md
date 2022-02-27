@@ -31,7 +31,7 @@ std::cout << matExpr2._v(1,0) << std::endl; // evaluate 1,0 th element then show
 ```
 # Currently working on (not implemented yet)
 ## Masking
-1. Can use mask (or filter) to select data from matrix seen bellow.
+1. Can use mask (or filter) to select data from matrix seen.
 ```c++
 // working as data retrive
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
