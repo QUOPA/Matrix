@@ -29,7 +29,7 @@ It is possible to calculate one element
 auto matExpr2 = (mat2 + mat1) * mat1.t() ) // formulating expression, not evaluated
 std::cout << matExpr2._v(1,0) << std::endl; // evaluate 1,0 th element then show (the other elements are not evaluated)
 ```
-# Currently working on (not implemented yet)
+# Currently working on...
 ## Masking
 1. Can use mask (or filter) to select data from matrix seen.
 ```c++
