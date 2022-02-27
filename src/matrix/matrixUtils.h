@@ -31,15 +31,23 @@ inline void throwIfInnerDifferent(const LhsType& LhsMat, const RhsType& RhsMat)
 }
 
 
-
 template <typename T, typename Derived>
 class myMatrixBase;
+
+template <typename Derived>
+class MatrixMaskBase;
 
 template <typename T, typename Derived>
 std::ostream& operator<<(std::ostream& o, const myMatrixBase<T, Derived>& MatIn);
 
+template <typename Derived>
+std::ostream& operator<<(std::ostream& o, const MatrixMaskBase<Derived>& MatIn);
+
 template <typename T, typename Derived>
 std::ostream& showMatrixInfo(const myMatrixBase<T, Derived>& MatIn);
+
+template<typename Derived>
+std::ostream& showMatrixInfo(const MatrixMaskBase<Derived>& MatIn);
 
 template <typename T, typename Derived>
 std::ostream& operator<<(std::ostream& o, const myMatrixBase<T, Derived>& MatIn)
@@ -69,4 +77,32 @@ std::ostream& showMatrixInfo(const myMatrixBase<T, Derived>& MatIn)
 	return std::cout;
 }
 
+template <typename Derived>
+std::ostream& operator<<(std::ostream& o, const MatrixMaskBase<Derived>& MatIn)
+{
+	o << "[";
+	for (IdxType r = 0; r < MatIn.getRows(); ++r)
+	{
+		if (r != 0)
+			o << std::endl;
+
+		for (IdxType c = 0; c < MatIn.getCols(); ++c)
+		{
+			if (c == 0)
+				o << MatIn._v(r, c);
+			else
+				o << ", " << MatIn._v(r, c);
+		}
+	}
+	o << "]";
+	return o;
+}
+
+
+template<typename Derived>
+std::ostream& showMatrixInfo(const MatrixMaskBase<Derived>& MatIn)
+{
+	std::cout << MatIn.getRows() << " Rows, " << MatIn.getCols() << " Cols" << std::endl;
+	return std::cout;
+}
 

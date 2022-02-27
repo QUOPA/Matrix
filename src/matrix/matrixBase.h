@@ -4,6 +4,7 @@
 #include "matrix/mytypes.h"
 #include "matrix/matrixUnaryOperations.h"
 #include "matrix/matrixBinaryOperations.h"
+#include "matrix/matrixMaskBase.h"
 
 template <typename T>
 class myMatrix;
@@ -25,6 +26,10 @@ public:
 	inline IdxType getRows() const { return derived()->getRows(); }
 	inline IdxType getCols() const { return derived()->getCols(); }
 
+
+
+
+
 	/* Unary Operations */
 
 	// 1. Transpose
@@ -36,6 +41,15 @@ public:
 
 	// 3. Squared
 	inline const auto Squared() { return createUnaryOperation<T, UNARY_SQUARED>(this->ref()); }
+
+	// Masking
+	template <typename MaskDerived> inline
+	const auto select(MaskDerived && InMatDerived) const
+	{	return createUnarySelecteOperation<T>(this->ref(), std::forward<MaskDerived>(InMatDerived));}
+
+	template <typename MaskDerived> inline
+	auto select(MaskDerived&& InMatDerived)
+	{	return createUnarySelecteOperation<T>(this->ref(), std::forward<MaskDerived>(InMatDerived));}
 
 	// Elementwise Unary Manipulate
 	template<typename Fn> inline 

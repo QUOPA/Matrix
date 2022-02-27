@@ -151,6 +151,9 @@
     <ClInclude Include="matrixBase.h" />
     <ClInclude Include="matrixBinaryOperations.h" />
     <ClInclude Include="matrixExceptions.h" />
+    <ClInclude Include="matrixMask.h" />
+    <ClInclude Include="matrixMaskUnaryOperations.h" />
+    <ClInclude Include="matrixMaskBase.h" />
     <ClInclude Include="matrixOperations.h" />
     <ClInclude Include="matrixReference.h" />
     <ClInclude Include="matrixUnaryOperations.h" />

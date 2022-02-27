@@ -3,6 +3,7 @@
 #include "testcommon/testmacros.h"
 #include "TestCasesUnaryOperation.h"
 #include "TestCasesBinaryOperation.h"
+#include "TestCasesMaskUnaryOperations.h"
 
 namespace unaryoperation
 {
@@ -32,3 +33,14 @@ void TestSuite()
 
 }
 
+
+namespace maskunaryoperations
+{
+
+void TestSuite()
+{
+	REGISTERTESTCASE(createmask)
+}
+
+
+}

@@ -76,7 +76,6 @@ public:
 
 	inline const T _v(IdxType r, IdxType c) const { return m_pData[r * m_nCols + c]; }
 	inline T& _v(IdxType r, IdxType c) { return m_pData[r * m_nCols + c]; }
-	
 
 private:
 	bool renewDataMemory(IdxType nSize)
@@ -100,7 +99,8 @@ private:
 	template <typename T2, typename InMatDerieved, int CalcType>
 	friend class myMatrixUnary;
 
-
+	template <typename T2, typename InMatDerieved, typename InMatrixMask>
+	friend class myMatrixUnarySelected;
 };
 
 template<typename T>
@@ -118,7 +118,6 @@ myMatrix<T>::myMatrix(const T* datain, IdxType nRows, IdxType nCols)
 	for (IdxType r = 0; r < m_nRows; ++r)
 		for (IdxType c = 0; c < m_nCols; ++c)
 			m_pData[r * m_nCols + c] = datain[r * m_nCols + c];
-
 }
 
 
@@ -129,12 +128,18 @@ myMatrix<T>::myMatrix(const std::vector<T>& datain, IdxType nRows, IdxType nCols
 	if (nRows <= 0 || nCols <= 0)
 		throw matrix_rangeerror("bad row size or column size input");
 
+	if (nRows * nCols != datain.size())
+		throw matrix_sizematcherror("Size do not match : nRows * nCols != datain.size()");
+
 	m_pData = new T[nRows * nCols];
 
 	m_nRows = nRows;
 	m_nCols = nCols;
 
-	for (IdxType r = 0; r < m_nRows; ++r)
-		for (IdxType c = 0; c < m_nCols; ++c)
-			m_pData[r * m_nCols + c] = datain[r * m_nCols + c];
+	std::size_t nSize = datain.size() * sizeof(T);
+	memcpy(m_pData, datain.data(), nSize);
+
+	//for (IdxType r = 0; r < m_nRows; ++r)
+	//	for (IdxType c = 0; c < m_nCols; ++c)
+	//		m_pData[r * m_nCols + c] = datain[r * m_nCols + c];
 }

@@ -42,5 +42,14 @@
     <ClInclude Include="matrixOperations.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="matrixMaskBase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="matrixMaskUnaryOperations.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="matrixMask.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

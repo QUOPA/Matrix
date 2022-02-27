@@ -6,6 +6,7 @@ int main()
 {
 	REGISTERTESTSUITE(unaryoperation)
 	REGISTERTESTSUITE(binaryoperation)
+	REGISTERTESTSUITE(maskunaryoperations)
 
 	char buff[256];
 	std::cin.getline(buff, 256);
