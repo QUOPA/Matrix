@@ -14,11 +14,35 @@ myMatrix<int> mat2 = matExpr; // evaluation of the matExpr by initialization.
 auto mat3 = matExpr.concrete() // evaluation of matExpr by function.
 ```
 ## For loop fusion
-The lazy evaluation enables 
+The lazy evaluation enables multiple element-wise matrix calculation using one 'for' loop as follows.
+```c++
+std::vector<int> vecInts = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+myMatrix<int> mat(vecInts, 2, 5);
+myMatrix<int> mat2(vecInts, 2, 5);
+auto matExpr = mat2 - mat - mat - mat - mat; // five calculation
+auto mat3 = matExpr.concrete(); // evaluation in one 'for' loop
+```
 ## Element-wise evaluation / Partial evaluation
-
-# To Do (not implemented yet)
-
+It is possible to calculate one element 
+```c++
+... continued to the above code
+auto matExpr2 = (mat2 + mat1) * mat1.t() ) // formulating expression, not evaluated
+std::cout << matExpr2._v(1,0) << std::endl; // evaluate 1,0 th element then show (the other elements are not evaluated)
+```
+# Currently working on (not implemented yet)
+## Masking
+1. Can use mask (or filter) to select data from matrix seen bellow.
+```c++
+// working as data retrive
+myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
+myMatrix<int> mat2 = mat1.select(mat1 >= 2) - mat1.select(mat1 < 2); // mat2 --> {-1,-2;3,4}
+```
+2. Mask for filtering element position to be updated
+```c++
+// working as data retrive
+myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
+mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
+```
 # Performance
 to be tested.
 
@@ -26,3 +50,5 @@ to be tested.
 * Calculation optimization. 
 * Numerical algorithm such as pseudo-inverse, faster matrix multiplication algorithm ....
 * Study on hardware acceleration.
+* More test codes for showing functions and performances.
+* Detailed To Do list ...
