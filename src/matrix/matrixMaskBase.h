@@ -2,6 +2,7 @@
 
 #include "matrix/myTypes.h"
 #include "matrix/matrixMaskUnaryOperations.h"
+#include "matrix/matrixMaskBinaryOperations.h"
 
 template <typename Derived>
 class MatrixMaskBase
@@ -39,6 +40,12 @@ public:
 private:
 	inline const Derived* derived() const { return static_cast<const Derived*>(this); }
 	inline Derived* derived() { return static_cast<Derived*>(this); }
+
+
+	template <typename LhsMatDerieved2, typename RhsMatDerieved2, int CalcType2>
+	friend class MatrixMaskBinary; 
+
+
 
 };
 

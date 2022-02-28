@@ -5,6 +5,7 @@
 #include "matrix/matrixUnaryOperations.h"
 #include "matrix/matrixBinaryOperations.h"
 #include "matrix/matrixMaskBase.h"
+#include "matrix/matrixMaskBinaryOperations.h"
 
 template <typename T>
 class myMatrix;
@@ -42,7 +43,7 @@ public:
 	// 3. Squared
 	inline const auto Squared() { return createUnaryOperation<T, UNARY_SQUARED>(this->ref()); }
 
-	// Masking
+	// Select From Masking
 	template <typename MaskDerived> inline
 	const auto select(MaskDerived && InMatDerived) const
 	{	return createUnarySelecteOperation<T>(this->ref(), std::forward<MaskDerived>(InMatDerived));}
@@ -89,12 +90,29 @@ public:
 		return  createBinaryOperation<T, BINARY_EDIV>(this->ref(), rhs.ref());
 	}
 
+	/* mask binary operations */
+	
+	// 7. Elementwise less than
+	template<typename OtherDerived> inline
+		const auto operator<(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_CMP_LESS>(this->ref(), rhs.ref());
+	}
+
+	// 8. Elementwise less than or equal to
+	template<typename OtherDerived> inline
+		const auto operator<=(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_CMP_LEQ>(this->ref(), rhs.ref());
+	}
+
 	// Elementwise Binary Manipulate
 	template<typename OtherDerived, typename Fn> inline
 		const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, Fn Func) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
 	
 	template<typename OtherDerived> inline
 	const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, T(*Func) (T, T) ) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
+
+
+
 
 	// assingment (non const only)
 	template<typename T, typename OtherMat>

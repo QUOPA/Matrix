@@ -211,6 +211,9 @@ protected:
 
 MATRIX_BINARY_OPERATION_CLASS_SHOE
 
+
+
+
 template <typename T, typename LhsMatBase, typename RhsMatBase, typename ManipFn>
 class myMatrixBinaryManipulate
 	: public myMatrixBinary<T, LhsMatBase, RhsMatBase, BINARY_BASE>

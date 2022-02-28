@@ -4,6 +4,8 @@
 #include "TestCasesUnaryOperation.h"
 #include "TestCasesBinaryOperation.h"
 #include "TestCasesMaskUnaryOperations.h"
+#include "TestCasesMaskBinaryOperations.h"
+
 
 namespace unaryoperation
 {
@@ -43,4 +45,12 @@ void TestSuite()
 }
 
 
+}
+
+namespace maskbinaryoperations
+{
+	void TestSuite()
+	{
+		REGISTERTESTCASE(createmaskbybinary)
+	}
 }
