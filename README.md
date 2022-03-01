@@ -42,11 +42,11 @@ myMatrix<int> mat2 = mat1.select(mat1 >= 2) - mat1.select(mat1 < 2); // mat2 -->
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
 ```
-# Currently working on...
-## Fixing bug when the lhs and rhs has roots the same data
+# Upcomming Features on...
+## Getting sub-matrix or sub-vector 
 ```c++
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
-mat1.t() = mat1; // unexpected value saved
+mat1.row(1) = 10; // now data --> {1,2,10,10}
 ```
 # Performance
 to be tested.
