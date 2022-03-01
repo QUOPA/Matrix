@@ -170,7 +170,8 @@ public:
 		{
 			for (IdxType c = 0; c < this->m_InMat.getCols(); ++c)
 			{
-				this->_v(r, c) = rhs._v(r, c);
+				if (this->m_InMask._v(r, c) == true)
+					this->_v(r, c) = rhs._v(r, c);
 			}
 		}
 	}

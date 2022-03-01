@@ -52,5 +52,7 @@ namespace maskbinaryoperations
 	void TestSuite()
 	{
 		REGISTERTESTCASE(createmaskbybinary)
+		REGISTERTESTCASE(matrixmaskboolean)
+		REGISTERTESTCASE(booleanandcomparison)
 	}
 }

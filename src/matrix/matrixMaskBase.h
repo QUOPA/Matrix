@@ -17,12 +17,35 @@ public:
 
 	/* Unary Operations */
 	
-	//1. transpose
-	inline const auto t() const { return createMaskUnaryOperation<MASK_UNARY_TRANSPOSE>(this->ref()); }
-	inline auto t() { return createMaskUnaryOperation<MASK_UNARY_TRANSPOSE>(this->ref()); }
-	
-	//2. bitwise-not
+	// 2. bitwise-not
 	inline const auto operator!() const { return createMaskUnaryOperation<MASK_UNARY_NOT>(this->ref()); }
+
+	/* Binary Operations  */
+	// 1. Elementwise And
+	template<typename OtherDerived> inline
+		const auto operator&(const MatrixMaskBase<OtherDerived> & rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_AND>(this->ref(), rhs.ref());
+	}
+
+	// 2. Elementwise OR
+	template<typename OtherDerived> inline
+		const auto operator|(const MatrixMaskBase<OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_OR>(this->ref(), rhs.ref());
+	}
+
+	// 4. Elementwise XOR
+	template<typename OtherDerived> inline
+		const auto operator^(const MatrixMaskBase<OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_XOR>(this->ref(), rhs.ref());
+	}
+
+	// 5. Elementwise Exclude
+	template<typename OtherDerived> inline
+		const auto operator-(const MatrixMaskBase<OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_EXCLUDE>(this->ref(), rhs.ref());
+	}
+
+
 
 	// assingment (non const only)
 	template<typename OtherMat>

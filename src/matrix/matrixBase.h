@@ -92,16 +92,40 @@ public:
 
 	/* mask binary operations */
 	
-	// 7. Elementwise less than
+	// 6. Elementwise less than
 	template<typename OtherDerived> inline
 		const auto operator<(const myMatrixBase<T, OtherDerived>& rhs) const {
 		return createBinaryMaskOperation<MASK_BINARY_CMP_LESS>(this->ref(), rhs.ref());
 	}
 
-	// 8. Elementwise less than or equal to
+	// 7. Elementwise less than or equal to
 	template<typename OtherDerived> inline
 		const auto operator<=(const myMatrixBase<T, OtherDerived>& rhs) const {
 		return createBinaryMaskOperation<MASK_BINARY_CMP_LEQ>(this->ref(), rhs.ref());
+	}
+
+	// 8. Elementwise greater than
+	template<typename OtherDerived> inline
+		const auto operator>(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_CMP_GREATER>(this->ref(), rhs.ref());
+	}
+
+	// 9. Elementwise greater than or equal to
+	template<typename OtherDerived> inline
+		const auto operator>=(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_CMP_GEQ>(this->ref(), rhs.ref());
+	}
+
+	// 10. Elementwise equal to
+	template<typename OtherDerived> inline
+		const auto operator==(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_CMP_EQUAL>(this->ref(), rhs.ref());
+	}
+
+	// 11. Elementwise less than or equal to
+	template<typename OtherDerived> inline
+		const auto operator!=(const myMatrixBase<T, OtherDerived>& rhs) const {
+		return createBinaryMaskOperation<MASK_BINARY_CMP_NEQ>(this->ref(), rhs.ref());
 	}
 
 	// Elementwise Binary Manipulate

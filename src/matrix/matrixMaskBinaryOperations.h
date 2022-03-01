@@ -49,8 +49,106 @@ protected:
 	RhsMatDerived m_RhsMat;
 };
 
+// 1. MASK_BINARY_AND
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_AND)
 
-// 7. BINARY_CMP_LESS
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) && this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+
+// 2. MASK_BINARY_OR
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_OR)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) || this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+
+// 4. MASK_BINARY_XOR
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_XOR)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) ^ this->m_RhsMat._v(r, c);
+	}
+
+	MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+// 5. MASK_BINARY_EXCLUDE
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_EXCLUDE)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) && !this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+
+// 6. BINARY_CMP_LESS
 MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_CMP_LESS)
 
 public:
@@ -72,10 +170,10 @@ protected:
 		return this->m_LhsMat._v(r, c) < this->m_RhsMat._v(r, c);
 	}
 
-	MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
 
 
-// 8. BINARY_CMP_LEQ
+// 7. BINARY_CMP_LEQ
 MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_CMP_LEQ)
 
 public:
@@ -98,6 +196,106 @@ protected:
 	}
 
 MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+
+// 8. BINARY_CMP_GREATER
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_CMP_GREATER)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) > this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+
+// 9. BINARY_CMP_GEQ
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_CMP_GEQ)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) >= this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+// 10. BINARY_CMP_EQUAL
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_CMP_EQUAL)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) == this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
+
+// 11. BINARY_CMP_LEQ
+MATRIX_MASK_BINARY_OPERATION_CLASS_HAT(MASK_BINARY_CMP_NEQ)
+
+public:
+	// read
+	inline IdxType getSize() const { return this->m_RhsMat.getSize(); }
+	inline IdxType getRows() const { return this->m_RhsMat.getRows(); }
+	inline IdxType getCols() const { return this->m_RhsMat.getCols(); }
+
+private:
+	void checkException()
+	{
+		throwIfColsDifferent(this->m_LhsMat, this->m_RhsMat);
+		throwIfRowsDifferent(this->m_LhsMat, this->m_RhsMat);
+	}
+
+protected:
+	inline const bool _v(IdxType r, IdxType c) const
+	{
+		return this->m_LhsMat._v(r, c) != this->m_RhsMat._v(r, c);
+	}
+
+MATRIX_MASK_BINARY_OPERATION_CLASS_SHOE
+
 
 template <int OpType, typename LhsMatDerived, typename RhsMatDerived>
 inline decltype(auto) createBinaryMaskOperation(LhsMatDerived&& LhsMat, RhsMatDerived&& RhsMat)
