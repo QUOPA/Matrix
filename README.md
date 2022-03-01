@@ -29,7 +29,6 @@ It is possible to calculate one element
 auto matExpr2 = (mat2 + mat1) * mat1.t() ) // formulating expression, not evaluated
 std::cout << matExpr2._v(1,0) << std::endl; // evaluate 1,0 th element then show (the other elements are not evaluated)
 ```
-# Currently working on...
 ## Masking
 1. Can use mask (or filter) to select data from matrix seen.
 ```c++
@@ -43,6 +42,12 @@ myMatrix<int> mat2 = mat1.select(mat1 >= 2) - mat1.select(mat1 < 2); // mat2 -->
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
 ```
+# Upcomming Features...
+## Getting sub-matrix or sub-vector 
+```c++
+myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
+mat1.row(1) = 10; // now data --> {1,2,10,10}
+```
 # Performance
 to be tested.
 
@@ -51,4 +56,7 @@ to be tested.
 * Numerical algorithm such as pseudo-inverse, faster matrix multiplication algorithm ....
 * Study on hardware acceleration.
 * More test codes for showing functions and performances.
+* Better interface
+* Hiding non interface functions and relate friendship
+* arithmetic + assignment such as +=, -=
 * Detailed To Do list ...
