@@ -56,4 +56,7 @@ to be tested.
 * Numerical algorithm such as pseudo-inverse, faster matrix multiplication algorithm ....
 * Study on hardware acceleration.
 * More test codes for showing functions and performances.
+* Better interface
+* Hiding non interface functions and relate friendship
+* arithmetic + assignment such as +=, -=
 * Detailed To Do list ...
