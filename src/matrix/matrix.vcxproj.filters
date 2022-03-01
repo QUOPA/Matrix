@@ -54,5 +54,8 @@
     <ClInclude Include="matrixMaskBinaryOperations.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="matrixScalarOperations.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

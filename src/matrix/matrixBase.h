@@ -27,10 +27,6 @@ public:
 	inline IdxType getRows() const { return derived()->getRows(); }
 	inline IdxType getCols() const { return derived()->getCols(); }
 
-
-
-
-
 	/* Unary Operations */
 
 	// 1. Transpose
@@ -58,7 +54,7 @@ public:
 
 	const auto EManip(T (*Func) (T) ) const { return createUnaryManipulateOperation<T>(this->ref(), Func); }
 
-	/*Binary Operations*/
+	/* Binary Operations */
 	
 	// 1. Elementwise Addition
 	template<typename OtherDerived> inline
@@ -90,7 +86,14 @@ public:
 		return  createBinaryOperation<T, BINARY_EDIV>(this->ref(), rhs.ref());
 	}
 
-	/* mask binary operations */
+	// Elementwise Binary Manipulate
+	template<typename OtherDerived, typename Fn> inline
+		const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, Fn Func) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
+
+	template<typename OtherDerived> inline
+		const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, T(*Func) (T, T)) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
+
+	/* binary operations return value is mask */
 	
 	// 6. Elementwise less than
 	template<typename OtherDerived> inline
@@ -128,19 +131,11 @@ public:
 		return createBinaryMaskOperation<MASK_BINARY_CMP_NEQ>(this->ref(), rhs.ref());
 	}
 
-	// Elementwise Binary Manipulate
-	template<typename OtherDerived, typename Fn> inline
-		const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, Fn Func) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
-	
-	template<typename OtherDerived> inline
-	const auto EManip(const myMatrixBase<T, OtherDerived>& rhs, T(*Func) (T, T) ) const { return createBinaryManipulateOperation<T>(this->ref(), rhs.ref(), Func); }
-
-
-
-
 	// assingment (non const only)
-	template<typename T, typename OtherMat>
-	inline void operator=(const myMatrixBase<T, OtherMat>& rhs) { derived()->operator=(*rhs.derived()); }
+	template<typename OtherDerived>
+	inline void operator=(const myMatrixBase<T, OtherDerived>& rhs) { derived()->operator=(*rhs.derived()); }
+
+	inline void operator=(T rhs) { derived()->operator=(rhs); }
 
 	// for internal use element pick (later to be put to protected )
 	inline const T _v(IdxType r, IdxType c) const { return derived()->_v(r,c); }

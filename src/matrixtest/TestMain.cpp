@@ -8,6 +8,7 @@ int main()
 	REGISTERTESTSUITE(binaryoperation)
 	REGISTERTESTSUITE(maskunaryoperations)
 	REGISTERTESTSUITE(maskbinaryoperations)
+	REGISTERTESTSUITE(scalaroperation)
 
 	char buff[256];
 	std::cin.getline(buff, 256);

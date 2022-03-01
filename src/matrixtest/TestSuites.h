@@ -5,7 +5,7 @@
 #include "TestCasesBinaryOperation.h"
 #include "TestCasesMaskUnaryOperations.h"
 #include "TestCasesMaskBinaryOperations.h"
-
+#include "TestCasesScalarOperation.h"
 
 namespace unaryoperation
 {
@@ -55,4 +55,15 @@ namespace maskbinaryoperations
 		REGISTERTESTCASE(matrixmaskboolean)
 		REGISTERTESTCASE(booleanandcomparison)
 	}
+}
+
+
+
+namespace scalaroperation
+{
+	void TestSuite()
+	{
+		REGISTERTESTCASE(scalararithmetic)
+	}
+
 }

@@ -35,5 +35,8 @@
     <ClInclude Include="TestCasesMaskBinaryOperations.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="TestCasesScalarOperation.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

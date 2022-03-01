@@ -66,6 +66,18 @@ public:
 
 	}
 
+	void operator=(T rhs)
+	{
+		for (IdxType c = 0; c < this->m_InMat.getRows(); ++c)
+		{
+			for (IdxType r = 0; r < this->m_InMat.getCols(); ++r)
+			{
+				_v(r, c) = rhs;
+			}
+		}
+	}
+
+
 	inline const auto & _ref() const {
 		return *this;
 	}

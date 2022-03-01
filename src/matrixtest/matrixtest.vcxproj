@@ -149,6 +149,7 @@
     <ClInclude Include="TestCasesBinaryOperation.h" />
     <ClInclude Include="TestCasesMaskBinaryOperations.h" />
     <ClInclude Include="TestCasesMaskUnaryOperations.h" />
+    <ClInclude Include="TestCasesScalarOperation.h" />
     <ClInclude Include="TestCasesUnaryOperation.h" />
     <ClInclude Include="TestSuites.h" />
   </ItemGroup>

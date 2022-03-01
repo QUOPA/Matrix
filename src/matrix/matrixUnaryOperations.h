@@ -73,6 +73,17 @@ public:
 		}
 	}
 
+	void operator=(T rhs)
+	{
+		for (IdxType c = 0; c < this->m_InMat.getRows(); ++c)
+		{
+			for (IdxType r = 0; r < this->m_InMat.getCols(); ++r)
+			{
+				this->m_InMat._v(c, r) = rhs;
+			}
+		}
+	}
+
 protected:
 	inline const T _v(IdxType r, IdxType c) const { return this->m_InMat._v(c, r); }
 	inline T & _v(IdxType r, IdxType c) { return this->m_InMat._v(c, r); }

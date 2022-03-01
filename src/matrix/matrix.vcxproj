@@ -157,6 +157,7 @@
     <ClInclude Include="matrixMaskBase.h" />
     <ClInclude Include="matrixOperations.h" />
     <ClInclude Include="matrixReference.h" />
+    <ClInclude Include="matrixScalarOperations.h" />
     <ClInclude Include="matrixUnaryOperations.h" />
     <ClInclude Include="matrixUtils.h" />
     <ClInclude Include="myTypes.h" />
