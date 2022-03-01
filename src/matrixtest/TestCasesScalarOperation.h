@@ -34,5 +34,17 @@ namespace scalaroperation
 		showFormatedMatrix(matDivision_MRight);
 	}
 
+	void scalarassignment()
+	{
+		std::vector<int> vecInts = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		myMatrix<int> mat(vecInts, 2, 5);
+		showFormatedMatrix(mat);
+
+		mat = mat + 5;
+		showFormatedMatrix(mat);
+
+		mat = 5;
+		showFormatedMatrix(mat);		
+	}
 
 }

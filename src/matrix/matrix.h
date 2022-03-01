@@ -40,7 +40,6 @@ public:
 		m_nCols = rhs.getCols();
 
 		std::size_t nSize = rhs.getSize() * sizeof(T);
-
 		memcpy(m_pData, rhs.m_pData, nSize);
 	}
 
@@ -54,27 +53,30 @@ public:
 	template<typename OtherMat>
 	void operator=(const myMatrixBase<T, OtherMat>& rhs)
 	{ 
-		if (!renewDataMemory(rhs.getSize()))
-			throw matrix_rangeerror("Failed to renew data memory of size :" + std::to_string(rhs.getSize()));
+		T * tmpData = new T[rhs.getSize()];
+		if (tmpData == nullptr)
+			throw matrix_memoryerror("Failed to create temporary data storage");
+
+		//if (!renewDataMemory(rhs.getSize()))
+		//	throw matrix_memoryerror("Failed to renew data memory of size :" + std::to_string(rhs.getSize()));
+
+		for (IdxType r = 0; r < m_nRows; ++r)
+			for (IdxType c = 0; c < m_nCols; ++c)
+				tmpData[r * m_nCols + c] = rhs._v(r, c);
 
 		m_nRows = rhs.getRows();
 		m_nCols = rhs.getCols();
 
-		for (IdxType r = 0; r < m_nRows; ++r)
-			for (IdxType c = 0; c < m_nCols; ++c)
-				_v(r, c) = rhs._v(r, c);
+		if (m_pData != nullptr)
+			delete[] m_pData;
 
+		m_pData = tmpData;
 	}
 
-	void operator=(T rhs)
+	inline void operator=(T rhs)
 	{
-		for (IdxType c = 0; c < this->m_InMat.getRows(); ++c)
-		{
-			for (IdxType r = 0; r < this->m_InMat.getCols(); ++r)
-			{
-				_v(r, c) = rhs;
-			}
-		}
+		for (int idx = 0; idx < getSize(); ++idx)
+			m_pData[idx] = rhs;
 	}
 
 

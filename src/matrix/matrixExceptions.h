@@ -16,6 +16,13 @@ public:
 	inline std::string getErrorKind() { return "matrix range error"; }
 };
 
+class matrix_memoryerror : public matrixexcept
+{
+public:
+	matrix_memoryerror(const std::string& strmsg) : matrixexcept(strmsg) {}
+	inline std::string getErrorKind() { return "matrix memory error"; }
+};
+
 class matrix_operationerror : public matrixexcept
 {
 public:

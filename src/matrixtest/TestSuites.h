@@ -64,6 +64,7 @@ namespace scalaroperation
 	void TestSuite()
 	{
 		REGISTERTESTCASE(scalararithmetic)
+		REGISTERTESTCASE(scalarassignment)
 	}
 
 }
