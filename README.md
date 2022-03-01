@@ -29,7 +29,6 @@ It is possible to calculate one element
 auto matExpr2 = (mat2 + mat1) * mat1.t() ) // formulating expression, not evaluated
 std::cout << matExpr2._v(1,0) << std::endl; // evaluate 1,0 th element then show (the other elements are not evaluated)
 ```
-# Currently working on...
 ## Masking
 1. Can use mask (or filter) to select data from matrix seen.
 ```c++
@@ -42,6 +41,12 @@ myMatrix<int> mat2 = mat1.select(mat1 >= 2) - mat1.select(mat1 < 2); // mat2 -->
 // working as data retrive
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
+```
+# Currently working on...
+## Fixing bug when the lhs and rhs has roots the same data
+```c++
+myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
+mat1.t() = mat1; // unexpected value saved
 ```
 # Performance
 to be tested.
