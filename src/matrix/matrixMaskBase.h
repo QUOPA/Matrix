@@ -45,11 +45,11 @@ public:
 		return createBinaryMaskOperation<MASK_BINARY_EXCLUDE>(this->ref(), rhs.ref());
 	}
 
-
-
 	// assingment (non const only)
 	template<typename OtherMat>
 	inline void operator=(const MatrixMaskBase<OtherMat>& rhs) { derived()->operator=(*rhs.derived()); }
+
+	inline void operator=(bool rhs) { derived()->operator=(rhs); }
 
 	inline decltype(auto) _v(IdxType r, IdxType c) const { return derived()->_v(r, c); }
 	inline decltype(auto) _v(IdxType r, IdxType c) { return derived()->_v(r, c); }

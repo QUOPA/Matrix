@@ -120,6 +120,17 @@ namespace binaryoperation
 	 myMatrix<double> mat3 = cmatd1.EManip(cmatd2,std::pow);
 	 showFormatedMatrix(mat3);
 
-
 }
+
+ void matrixselect()
+ {
+	 std::vector<int> vecInt = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	 myMatrix<int> cmat1(vecInt, 2, 5);
+	 myMatrix<int> cmat2(vecInt, 2, 5);
+
+     cmat1.select(cmat1 == cmat2) = cmat1.select(cmat1 == cmat2);
+
+ }
+
+
 }

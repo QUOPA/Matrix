@@ -45,6 +45,9 @@ void transposeAssignment()
 	std::cout << "after mat.t() = mat2 ... " << std::endl;
 	showFormatedMatrix(mat);
 
+	mat.t().t() = mat;
+	showFormatedMatrix(mat);
+
 	//below not allowed
 	//const myMatrix<int> constMat(vecInts, 2, 5);
 	//constMat.t() = mat2; 
@@ -87,6 +90,9 @@ void manipfunction()
 	//myMatrix<double> mat3 = mat2.EManip(std::log10);
 	//showFormatedMatrix(mat3)
 }
+
+
+
 
 
 }

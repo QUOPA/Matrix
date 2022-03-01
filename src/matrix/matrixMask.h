@@ -3,6 +3,7 @@
 #include "matrix/matrixMaskBase.h"
 #include "matrix/matrixexceptions.h"
 #include <vector>
+#include <algorithm>
 
 template<typename Derived>
 class MatrixMaskBase;
@@ -53,14 +54,21 @@ public:
 	template<typename OtherMat>
 	void operator=(const MatrixMaskBase<OtherMat>& rhs)
 	{
-		m_Mask.resize(rhs.getSize());
 		m_nRows = rhs.getRows();
 		m_nCols = rhs.getCols();
 
+		std::vector<bool> tmpMask(rhs.getSize());
+
 		for (IdxType r = 0; r < m_nRows; ++r)
 			for (IdxType c = 0; c < m_nCols; ++c)
-				_v(r, c) = rhs._v(r, c);
+				tmpMask[r * m_nCols + c] = rhs._v(r, c);
+
+		m_Mask = std::move(tmpMask);
 	}
+
+	inline void operator=(bool rhs)
+	{ std::fill(m_Mask.begin(), m_Mask.end(), rhs); }
+
 
 	inline IdxType getSize() const { return m_nRows * m_nCols; }
 	inline IdxType getRows() const { return m_nRows; }

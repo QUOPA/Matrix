@@ -55,8 +55,11 @@ public:
 	inline IdxType getCols() const { return this->m_InMat.getRows(); }
 
 	// write only
-	template<typename OtherMat>
-	void operator=(const myMatrixBase<T, OtherMat>& rhs)
+	inline void operator=(const myMatrixUnary& rhs)
+	{	operator=(static_cast< myMatrixBase<T, myMatrixUnary<T, InMatDerieved, UNARY_TRANSPOSE> >> (rhs)); }
+
+	template<typename T2, typename OtherMat>
+	void operator=(const myMatrixBase<T2, OtherMat>& rhs)
 	{
 		if (this->m_InMat.getRows() != rhs.getCols())
 			throw matrix_rangeerror("error in transpose assignment: the number of rows lhs should be the same with the number of columns of rhs");
@@ -64,13 +67,33 @@ public:
 		if (this->m_InMat.getCols() != rhs.getRows())
 			throw matrix_rangeerror("error in transpose assignment: the number of columns lhs should be the same with the number of rows of rhs");
 
-		for (IdxType c = 0; c < this->m_InMat.getRows(); ++c)
+		T* tmpBuff = new T[this->m_InMat.getSize()];
+		if (tmpBuff == nullptr)
+			throw matrix_memoryerror("memory error during transpose assignment");
+
+		IdxType inrows = rhs.getRows();
+		IdxType incols = rhs.getCols();
+
+		for (IdxType r = 0; r < inrows; ++r)
 		{
-			for (IdxType r = 0; r < this->m_InMat.getCols(); ++r)
+			for (IdxType c = 0; c < incols; ++c)
 			{
-				this->m_InMat._v(c, r) = rhs._v(r, c);
+				tmpBuff[c* inrows + r] = rhs._v(r, c);
 			}
 		}
+
+		IdxType outcols = this->m_InMat.getCols();
+		IdxType outrows = this->m_InMat.getRows();
+
+		for (IdxType r = 0; r < outrows; ++r)
+		{
+			for (IdxType c = 0; c < outcols; ++c)
+			{
+				this->m_InMat._v(r, c) = tmpBuff[r * outcols + c];
+			}
+		}
+
+		delete[] tmpBuff;
 	}
 
 	void operator=(T rhs)
@@ -168,8 +191,11 @@ public:
 	inline IdxType getRows() const { return this->m_InMat.getRows(); }
 	inline IdxType getCols() const { return this->m_InMat.getCols(); }
 
-	template<typename OtherMat>
-	void operator=(const myMatrixBase<T, OtherMat>& rhs)
+	inline void operator=(const myMatrixUnarySelected& rhs)
+	{	operator=(static_cast<myMatrixBase<T, myMatrixUnarySelected<T, InMatDerieved, InMatrixMask> >> (rhs));}
+
+	template<typename T2, typename OtherMat>
+	void operator=(const myMatrixBase<T2, OtherMat>& rhs)
 	{
 		if (this->m_InMat.getRows() != rhs.getRows())
 			throw matrix_sizematcherror_rows();
@@ -177,14 +203,35 @@ public:
 		if (this->m_InMat.getCols() != rhs.getCols())
 			throw matrix_sizematcherror_cols();
 
-		for (IdxType r = 0; r < this->m_InMat.getRows(); ++r)
+		T* tmpBuff = new T[this->m_InMat.getSize()];
+		if (tmpBuff == nullptr)
+			throw matrix_memoryerror("memory error during transpose assignment");
+
+		IdxType inoutrows = rhs.getRows();
+		IdxType inoutcols = rhs.getCols();
+
+		T* tmpData = new T[rhs.getSize()];
+		if (tmpData == nullptr)
+			throw matrix_memoryerror("Failed to create temporary data storage");
+
+		for (IdxType r = 0; r < inoutrows; ++r)
 		{
-			for (IdxType c = 0; c < this->m_InMat.getCols(); ++c)
+			for (IdxType c = 0; c < inoutrows; ++c)
 			{
 				if (this->m_InMask._v(r, c) == true)
-					this->_v(r, c) = rhs._v(r, c);
+					tmpData[r* inoutrows + c] = rhs._v(r, c);
 			}
 		}
+
+		for (IdxType r = 0; r < inoutrows; ++r)
+		{
+			for (IdxType c = 0; c < inoutrows; ++c)
+			{
+				if (this->m_InMask._v(r, c) == true)
+					this->_v(r, c) = tmpData[r * inoutrows + c];
+			}
+		}
+		delete[] tmpData;
 	}
 
 protected:

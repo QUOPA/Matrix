@@ -65,6 +65,7 @@ namespace scalaroperation
 	{
 		REGISTERTESTCASE(scalararithmetic)
 		REGISTERTESTCASE(scalarassignment)
+		REGISTERTESTCASE(maskscalaroperations)
 	}
 
 }

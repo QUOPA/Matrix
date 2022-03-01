@@ -4,6 +4,7 @@
 #include "matrix/matrixMask.h"
 #include "matrix/matrixUtils.h"
 #include "matrix/matrixOperations.h"
+#include "matrix/matrixMaskOperations.h"
 
 
 namespace scalaroperation
@@ -45,6 +46,30 @@ namespace scalaroperation
 
 		mat = 5;
 		showFormatedMatrix(mat);		
+	}
+
+	void maskscalaroperations()
+	{
+		std::vector<int> vecInts = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		myMatrix<int> mat(vecInts, 2, 5);
+
+		showFormatedMatrix(mat);
+		showFormatedMatrix(mat < 5);
+		showFormatedMatrix(5 < mat);
+		showFormatedMatrix(mat <= 5);
+		showFormatedMatrix(5 <= mat);
+		showFormatedMatrix(mat > 5);
+		showFormatedMatrix(5 > mat);
+		showFormatedMatrix(mat >= 5);
+		showFormatedMatrix(5 >= mat);
+		showFormatedMatrix(mat == 5);
+		showFormatedMatrix(5 == mat);
+		showFormatedMatrix(mat != 5);
+		showFormatedMatrix(5 != mat);
+		
+		showFormatedMatrix( 3 < mat & mat < 8 );
+		showFormatedMatrix( mat < 3 | mat > 8);
+
 	}
 
 }

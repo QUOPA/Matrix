@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define showFormatedMatrix(mtxname) \
-showMatrixNameAndInfo(mtxname)<< mtxname << std::endl;
+showMatrixNameAndInfo(mtxname)<< (mtxname) << std::endl;
 
 #define showMatrixNameAndInfo(mtxname) \
 std::cout << "<" << #mtxname << ">" << std::endl; \
