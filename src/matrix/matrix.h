@@ -60,12 +60,12 @@ public:
 		//if (!renewDataMemory(rhs.getSize()))
 		//	throw matrix_memoryerror("Failed to renew data memory of size :" + std::to_string(rhs.getSize()));
 
+		m_nRows = rhs.getRows();
+		m_nCols = rhs.getCols();
+
 		for (IdxType r = 0; r < m_nRows; ++r)
 			for (IdxType c = 0; c < m_nCols; ++c)
 				tmpData[r * m_nCols + c] = rhs._v(r, c);
-
-		m_nRows = rhs.getRows();
-		m_nCols = rhs.getCols();
 
 		if (m_pData != nullptr)
 			delete[] m_pData;

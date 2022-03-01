@@ -43,7 +43,7 @@ public:
 		m_nCols = rhs.getCols();
 	}
 
-	void operator=(MatrixMask&& rhs)
+	void operator=(MatrixMask&& rhs) 
 	{
 		std::swap(m_Mask, rhs.m_Mask);
 		m_nRows = rhs.getRows();
