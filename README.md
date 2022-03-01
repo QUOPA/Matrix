@@ -42,7 +42,7 @@ myMatrix<int> mat2 = mat1.select(mat1 >= 2) - mat1.select(mat1 < 2); // mat2 -->
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
 ```
-# Upcomming Features on...
+# Upcomming Features...
 ## Getting sub-matrix or sub-vector 
 ```c++
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
