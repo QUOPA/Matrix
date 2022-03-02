@@ -54,7 +54,6 @@ myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1 += 10; // now data --> {11,12,13,14}
 ```
 
-
 # Performance
 to be tested.
 
@@ -68,3 +67,6 @@ to be tested.
 * Hiding non interface functions and relate friendship
 * arithmetic + assignment such as +=, -=
 * Detailed To Do list ...
+
+# Limit
+The original work was for practicing programming skills, so some codes could not be the optimal for numerical calculations.
