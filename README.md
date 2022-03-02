@@ -48,10 +48,18 @@ mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.row(1) = 10; // now data --> {1,2,10,10}
 ```
+## Arithmetic and Assign
+```c++
+myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
+mat1 += 10; // now data --> {11,12,13,14}
+```
+
+
 # Performance
 to be tested.
 
 # Further Works
+* Determine Class name ... not "myMatrix" ... 
 * Calculation optimization. 
 * Numerical algorithm such as pseudo-inverse, faster matrix multiplication algorithm ....
 * Study on hardware acceleration.
