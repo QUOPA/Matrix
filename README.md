@@ -1,6 +1,6 @@
 # Matrix
 An easy-to-use header-only C++ library for matrix representation and calcualtion.
-This matrix library support lazy evaluation, element-wise evaluation and so on, exploiting compile-time generic coding methods and patterns. 
+This matrix library support lazy evaluation, element-wise evaluation and so on, exploiting compile-time generic coding approach. 
 The CRTP based class/expression backbone was deeply influenced by the famous matrix library 'Eigen'. 
 
 # Features
@@ -48,10 +48,17 @@ mat1.select(mat1 < 2) = - mat1; // mat2 --> {-1,-2;3,4}
 myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.row(1) = 10; // now data --> {1,2,10,10}
 ```
+## Arithmetic and Assign
+```c++
+myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
+mat1 += 10; // now data --> {11,12,13,14}
+```
+
 # Performance
 to be tested.
 
 # Further Works
+* Determine Class name ... not "myMatrix" ... 
 * Calculation optimization. 
 * Numerical algorithm such as pseudo-inverse, faster matrix multiplication algorithm ....
 * Study on hardware acceleration.
@@ -60,3 +67,6 @@ to be tested.
 * Hiding non interface functions and relate friendship
 * arithmetic + assignment such as +=, -=
 * Detailed To Do list ...
+
+# Limit
+The original work was for practicing programming skills, so some codes could not be the optimal for numerical calculations.
