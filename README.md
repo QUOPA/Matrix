@@ -1,6 +1,6 @@
 # Matrix
 An easy-to-use header-only C++ library for matrix representation and calcualtion.
-This matrix library support lazy evaluation, element-wise evaluation and so on, exploiting compile-time generic coding methods and patterns. 
+This matrix library support lazy evaluation, element-wise evaluation and so on, exploiting compile-time generic coding approach. 
 The CRTP based class/expression backbone was deeply influenced by the famous matrix library 'Eigen'. 
 
 # Features
