@@ -3,6 +3,7 @@
 #include "matrix/myTypes.h"
 #include "matrix/matrixExceptions.h"
 #include "matrix/matrixBase.h"
+#include "matrix/matrixUtils.h"
 
 
 #define MATRIX_BINARY_OPERATION_CLASS_HAT(CalcType)					\

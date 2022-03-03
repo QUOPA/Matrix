@@ -53,24 +53,40 @@ public:
 	template<typename OtherMat>
 	void operator=(const myMatrixBase<T, OtherMat>& rhs)
 	{ 
-		T * tmpData = new T[rhs.getSize()];
-		if (tmpData == nullptr)
-			throw matrix_memoryerror("Failed to create temporary data storage");
+		if (getSize() != rhs.getSize())
+		{
+			T* tmpData = new T[rhs.getSize()];
+			if (tmpData == nullptr)
+				throw matrix_memoryerror("Failed to create temporary data storage");
 
-		//if (!renewDataMemory(rhs.getSize()))
-		//	throw matrix_memoryerror("Failed to renew data memory of size :" + std::to_string(rhs.getSize()));
+			m_nRows = rhs.getRows();
+			m_nCols = rhs.getCols();
 
-		m_nRows = rhs.getRows();
-		m_nCols = rhs.getCols();
+			for (IdxType r = 0; r < m_nRows; ++r)
+				for (IdxType c = 0; c < m_nCols; ++c)
+					tmpData[r * m_nCols + c] = rhs._v(r, c);
 
-		for (IdxType r = 0; r < m_nRows; ++r)
-			for (IdxType c = 0; c < m_nCols; ++c)
-				tmpData[r * m_nCols + c] = rhs._v(r, c);
+			if (m_pData != nullptr)
+				delete[] m_pData;
 
-		if (m_pData != nullptr)
-			delete[] m_pData;
+			m_pData = tmpData;
+		}
+		else
+		{
+			if (m_pData == nullptr)
+				m_pData = new T[getSize()];
 
-		m_pData = tmpData;
+			if (m_pData == nullptr)
+				throw matrix_memoryerror("Failed to create temporary data storage");
+
+			m_nRows = rhs.getRows();
+			m_nCols = rhs.getCols();
+
+			for (IdxType r = 0; r < m_nRows; ++r)
+				for (IdxType c = 0; c < m_nCols; ++c)
+					m_pData[r * m_nCols + c] = rhs._v(r, c);
+
+		}
 	}
 
 	inline void operator=(T rhs)
