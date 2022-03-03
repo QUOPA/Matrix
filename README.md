@@ -22,6 +22,7 @@ auto matExpr = mat2 - mat - mat - mat - mat; // five calculation
 auto mat3 = matExpr.concrete(); // evaluation in one 'for' loop
 ```
 [more examples](https://github.com/QUOPA/Matrix/blob/main/src/matrixtest/TestCasesBinaryOperation.h)
+
 ## Element-wise evaluation / Partial evaluation
 It is possible to calculate one element 
 ```c++
@@ -37,6 +38,7 @@ myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 myMatrix<int> mat2 = mat1.select(mat1 >= 2) - mat1.select(mat1 < 2); // mat2 --> {-1,-2;3,4}
 ```
 [more examples.](https://github.com/QUOPA/Matrix/blob/main/src/matrixtest/TestCasesScalarOperation.h)
+
 2. Mask for filtering element position to be updated
 ```c++
 // working as data retrive
@@ -44,6 +46,7 @@ myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.select(mat1 < 2) = - mat1; // mat1 --> {-1,2;3,4}
 ```
 [more examples.](https://github.com/QUOPA/Matrix/blob/main/src/matrixtest/TestCasesMaskUnaryOperations.h)
+
 3. Mask arithematic
 ```c++
 // working as data retrive
@@ -51,6 +54,7 @@ myMatrix<int> mat1 ({1,2,3,4}, 2, 2);
 mat1.select(mat1 < 2 | mat1 == 4 ) = - mat1; // mat1 --> {-1,2;3,-4}
 ```
 [more examples.](https://github.com/QUOPA/Matrix/blob/main/src/matrixtest/TestCasesMaskBinaryOperations.h)
+
 # Upcomming Features...
 ## Getting sub-matrix or sub-vector 
 ```c++
